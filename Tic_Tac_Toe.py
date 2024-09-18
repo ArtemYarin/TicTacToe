@@ -1,32 +1,32 @@
 # Creating a board
-boardData = [["-" for i in range(3)] for j in range(3)]
+board_data = [["-" for i in range(3)] for j in range(3)]
 
 # Active player
-nowSign = "o"
+now_sign = "o"
 
 
-def prBoard(board):
+def pr_board(board):
     # Output game board
     print(f"  0 1 2 \n0 {board[0][0]} {board[0][1]} {board[0][2]} \n1 {board[1][0]} {board[1][1]} {board[1][2]} \n2 {board[2][0]} {board[2][1]} {board[2][2]}")
 
 
 def change(sign):
     # Square change
-    global boardData
+    global board_data
     print(f"Player {sign} turn")
     line = input("Choose a line: ")
     column = input("Choose a column: ")
     if line not in ["0", "1", "2"] or column not in ["0", "1", "2"]:
         print("Incorrect format")
         return change(sign)
-    elif boardData[int(line)][int(column)] != "-":
+    elif board_data[int(line)][int(column)] != "-":
         print("Selected square is already occupied, please choose another one")
         return change(sign)
     else:
-        boardData[int(line)][int(column)] = sign
+        board_data[int(line)][int(column)] = sign
 
 
-def gameEnd(board, sign):
+def game_end(board, sign):
     # Winner check
     for i in board:
         if i.count(sign) == 3:
@@ -45,17 +45,17 @@ def gameEnd(board, sign):
 
 
 # Start
-prBoard(boardData)
+pr_board(board_data)
 
 while True:
     # Player´s turn
-    change(nowSign)
-    prBoard(boardData)
+    change(now_sign)
+    pr_board(board_data)
 
     # Check for winner
-    x = gameEnd(boardData, nowSign)
+    x = game_end(board_data, now_sign)
     if x == 1:
-        print(f"The winner is: {nowSign}")
+        print(f"The winner is: {now_sign}")
         break
     elif x == 2:
         print("Draw")
@@ -63,7 +63,7 @@ while True:
 
     # Changing sign
     # Next player´s turn
-    if nowSign == "o":
-        nowSign = "x"
+    if now_sign == "o":
+        now_sign = "x"
     else:
-        nowSign = "o"
+        now_sign = "o"
